@@ -1,39 +1,83 @@
 import psycopg2
 
-# Connect to the database
-conexion = psycopg2.connect(
+# try:
+#     conexion = psycopg2.connect(
+#     host="localhost",
+#     database="tienda",
+#     user="postgres",
+#     password="root"
+#     )
+#     print("Conexión exitosa")
+#     conexion.close()
+# except Exception as e:
+#     print(f"Ocurrió un error: {e}")
+#
+# try:
+#     conexion = psycopg2.connect(
+#     host="localhost",
+#     database="tienda",
+#     user="postgres",
+#     password="root"
+#     )
+#     cursor = conexion.cursor()
+#     print("Conexión exitosa")
+#     cursor.execute("""
+#     CREATE TABLE IF NOT EXISTS productos(
+#         id serial PRIMARY KEY,
+#         nombre VARCHAR(255) NOT NULL,
+#         precio NUMERIC(10, 2) NOT NULL
+#     )
+#     """)
+#     conexion.commit()
+#     print("Tabla creada exitosamente")
+#     conexion.close()
+# except Exception as e:
+#     print(f"Ocurrió un error: {e}")
+
+# try:
+#     conexion = psycopg2.connect(
+#     host="localhost",
+#     database="tienda",
+#     user="postgres",
+#     password="root"
+#     )
+#     cursor = conexion.cursor()
+#     print("Conexión exitosa")
+#     cursor.execute("INSERT INTO productos(nombre, precio) VALUES('Teclado', 50.00)")
+#     conexion.commit()
+#     print("Registro insertado exitosamente")
+#     conexion.close()
+# except Exception as e:
+#     print(f"Ocurrió un error: {e}")
+
+# try:
+#     conexion = psycopg2.connect(
+#     host="localhost",
+#     database="tienda",
+#     user="postgres",
+#     password="root"
+#     )
+#     cursor = conexion.cursor()
+#     print("Conexión exitosa")
+#     cursor.execute("UPDATE productos SET precio = 60.00 WHERE nombre = 'Teclado'")
+#     conexion.commit()
+#     print("Registro actualizado exitosamente")
+#     conexion.close()
+# except Exception as e:
+#     print(f"Ocurrió un error: {e}")
+
+try:
+    conexion = psycopg2.connect(
     host="localhost",
     database="tienda",
     user="postgres",
     password="root"
     )
-
-# if conexion:
-#     print("Conectado a la base de datos PostgreSQL")
-
-# cursor = conexion.cursor()
-#
-# cursor.execute("""
-# CREATE TABLE IF NOT EXISTS productos (
-#     id SERIAL PRIMARY KEY,
-#     nombre VARCHAR(255) NOT NULL,
-#     precio FLOAT NOT NULL
-#     )
-# ))""")
-# conexion.commit()
-
-# cursor = conexion.cursor()
-# cursor.execute("INSERT INTO productos (nombre, precio) VALUES (%s, %s)",('Monitor', 299.99))
-# conexion.commit()
-
-# cursor = conexion.cursor()
-# cursor.execute("SELECT * FROM productos")
-#
-# for fila in cursor.fetchall():
-#     print(fila)
-
-cursor = conexion.cursor()
-cursor.execute("DELETE FROM productos WHERE id = 1")
-conexion.commit()
-
-conexion.close()
+    cursor = conexion.cursor()
+    print("Conexión exitosa")
+    cursor.execute("DELETE FROM productos WHERE nombre = 'Teclado'")
+    conexion.commit()
+    print("Registro eliminado exitosamente")
+    conexion.close()
+except Exception as e:
+    print(f"Ocurrió un error: {e}")

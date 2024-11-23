@@ -1,29 +1,69 @@
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://localhost:27017')
+try:
+    cliente = MongoClient('localhost', 27017)
+    print("Conexión exitosa")
+except Exception as e:
+    print(f"Error: {e}")
 
-db = client['tienda']
+try:
+    db = cliente['tienda']
+    print("Base de datos tienda seleccionada")
+    coleccion = db['productos']
+    print("Colección productos seleccionada")
+except Exception as e:
+    print(f"Error: {e}")
 
-print("Conectado a la base de datos")
+# # Insertar un documento
+#
+# try:
+#     producto = {"nombre": "Laptop", "precio": 15000}
+#     resultado = coleccion.insert_one(producto)
+#     print(f"Producto insertado con éxito: {resultado.inserted_id}")
+# except Exception as exception:
+#     print(f"Error: {exception}")
+#
+# try: 
+#     print("Listando productos")
+#     for producto in coleccion.find():
+#         print(producto)
+# except Exception as e:
+#     print(f"Error: {e}")
+#
+# # Actualizar un documento
+#
+# try:
+#     resultado = coleccion.update_one({"nombre": "Laptop"}, {"$set": {"precio": 20000}})
+#     print(f"Producto actualizado con éxito: {resultado.modified_count}")
+#     if resultado.modified_count > 0:
+#         print("Producto actualizado con éxito")
+#     else:
+#         print("Producto no encontrado")
+# except Exception as e:
+#     print(f"Error: {e}")
+#
+# try:
+#     print("Listando productos")
+#     for producto in coleccion.find():
+#         print(producto)
+# except Exception as e:
+#     print(f"Error: {e}")
 
-coleccion = db['productos']
+# Eliminar un documento
 
-# producto = {"nombre": "Monitor", "precio": 299.99}
-# coleccion.insert_one(producto)
-# print("Producto insertado", producto)
+try:
+    resultado = coleccion.delete_one({"nombre": "Laptop"})
+    print(f"Producto eliminado con éxito: {resultado.deleted_count}")
+    if resultado.deleted_count > 0:
+        print("Producto eliminado con éxito")
+    else:
+        print("Producto no encontrado")
+except Exception as e:
+    print(f"Error: {e}")
 
-# print("Productos en la coleccion")
-# for producto in coleccion.find():
-#     print(producto)
-
-# coleccion.update_one({"nombre": "Monitor"}, {"$set": {"precio": 199.99}})
-# print("Producto actualizado")
-
-coleccion.delete_one({"nombre": "Monitor"})
-print(f"Producto eliminado")
-
-print("Productos despues de la eliminacion")
-for producto in coleccion.find():
-    print(producto)
-
-client.close()
+try:
+    print("Listando productos")
+    for producto in coleccion.find():
+        print(producto)
+except Exception as e:
+    print(f"Error: {e}")
